@@ -17,10 +17,9 @@ public class UserQueryRepository {
         em.persist(user); // 영속화 (영속성 컨텍스트)
     }
 
+    // JPA findById
     public User findById(Integer id) {
-        Query query = em.createQuery("select u from User u where u.id = :id", User.class);
-        query.setParameter("id", id);
-        return (User) query.getSingleResult();
+        return em.find(User.class, id);
     }
 
 }
