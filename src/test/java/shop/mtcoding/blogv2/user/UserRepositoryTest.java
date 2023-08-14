@@ -22,7 +22,7 @@ public class UserRepositoryTest {
         User user = userRepository.findById(1).get();
         // User user = User.builder().id(1).password("5678").build();
         user.setPassword("5678");
-        userRepository.save(user);
+        // userRepository.save(user);
         em.flush();
     } // rollback
 
