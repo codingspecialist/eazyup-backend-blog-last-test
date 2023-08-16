@@ -35,7 +35,7 @@ public class Board {
     @Column(nullable = true, length = 10000)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user; // 1+N
 
     @CreationTimestamp
