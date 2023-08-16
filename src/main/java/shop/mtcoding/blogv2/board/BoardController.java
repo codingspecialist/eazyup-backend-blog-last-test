@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class BoardController {
@@ -19,10 +20,19 @@ public class BoardController {
 
     // localhost:8080?page=1&keyword=바나나
     @GetMapping("/")
-    public String 봉준이(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest request) {
+    public String index(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest request) {
         Page<Board> boardPG = boardService.게시글목록보기(page);
         request.setAttribute("boardPG", boardPG);
+        request.setAttribute("prevPage", boardPG.getNumber() - 1);
+        request.setAttribute("nextPage", boardPG.getNumber() + 1);
+
         return "index";
+    }
+
+    @GetMapping("/test")
+    public @ResponseBody Page<Board> test(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest request) {
+        Page<Board> boardPG = boardService.게시글목록보기(page);
+        return boardPG; // ViewResolver (X), MessageConverter (O) -> json 직렬화
     }
 
     @GetMapping("/board/saveForm")

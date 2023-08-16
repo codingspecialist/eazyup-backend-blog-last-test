@@ -13,11 +13,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.bytebuddy.dynamic.TypeResolutionStrategy.Lazy;
+import lombok.ToString;
 import shop.mtcoding.blogv2.user.User;
 
 @NoArgsConstructor
@@ -35,7 +37,7 @@ public class Board {
     @Column(nullable = true, length = 10000)
     private String content;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user; // 1+N
 
     @CreationTimestamp
