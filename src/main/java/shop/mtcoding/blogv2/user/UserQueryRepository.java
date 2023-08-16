@@ -5,7 +5,6 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserQueryRepository {
@@ -20,6 +19,13 @@ public class UserQueryRepository {
     // JPA findById
     public User findById(Integer id) {
         return em.find(User.class, id);
+    }
+
+    public User findByUsername(String username) {
+        Query query = em.createQuery("select u from User u where u.username = :username", User.class);
+        query.setParameter("username", username);
+        return (User) query.getSingleResult();
+
     }
 
 }

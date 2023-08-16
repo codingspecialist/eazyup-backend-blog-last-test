@@ -37,11 +37,6 @@ public class UserRepositoryTest {
     } // rollback
 
     @Test
-    public void mSave_test() {
-        userRepository.mSave("love", "1234", "love@nate.com");
-    } // rollback
-
-    @Test
     public void findByUsername_test() {
         User user = userRepository.findByUsername("hello");
         System.out.println("테스트 : " + user.getEmail());
@@ -57,17 +52,6 @@ public class UserRepositoryTest {
         } else {
             System.out.println("해당 id를 찾을 수 없습니다");
         }
-    }
-
-    @Test
-    public void mFindById_test() {
-        User user = userRepository.mFindById(3);
-        if (user == null) {
-            System.out.println("해당 id를 찾을 수 없습니다");
-        } else {
-            System.out.println(user.getEmail());
-        }
-
     }
 
     @Test
