@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.mtcoding.blogv2._core.util.Script;
+
 @Controller
 public class BoardController {
 
@@ -22,7 +24,7 @@ public class BoardController {
     public String update(@PathVariable Integer id, BoardRequest.UpdateDTO updateDTO) {
         // where 데이터, body, session값
         boardService.게시글수정하기(id, updateDTO);
-        return "redirect:/board/"+id;
+        return "redirect:/board/" + id;
     }
 
     @GetMapping("/board/{id}/updateForm")
@@ -33,9 +35,9 @@ public class BoardController {
     }
 
     @PostMapping("/board/{id}/delete")
-    public String delete(@PathVariable Integer id) {
+    public @ResponseBody String delete(@PathVariable Integer id) {
         boardService.삭제하기(id);
-        return "redirect:/";
+        return Script.href("/");
     }
 
     @GetMapping("/board/{id}")

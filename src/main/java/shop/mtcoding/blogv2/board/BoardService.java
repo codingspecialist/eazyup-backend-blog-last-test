@@ -49,7 +49,11 @@ public class BoardService {
 
     @Transactional
     public void 삭제하기(Integer id) {
-        boardRepository.deleteById(id);
+        try {
+            boardRepository.deleteById(6);
+        } catch (Exception e) {
+            throw new RuntimeException("6번은 없어요");
+        }
     }
 
     @Transactional
