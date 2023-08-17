@@ -1,7 +1,5 @@
 package shop.mtcoding.blogv2.board;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +21,11 @@ public class BoardRepositoryTest {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Test
+    public void deleteById_test() {
+        boardRepository.deleteById(6);
+    } // rollback
 
     @Test
     public void mFindById_test() {

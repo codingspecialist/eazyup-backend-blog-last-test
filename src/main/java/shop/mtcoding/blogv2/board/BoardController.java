@@ -20,6 +20,12 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable Integer id) {
+        boardService.삭제하기(id);
+        return "index";
+    }
+
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id, Model model) {
         Board board = boardService.상세보기(id);

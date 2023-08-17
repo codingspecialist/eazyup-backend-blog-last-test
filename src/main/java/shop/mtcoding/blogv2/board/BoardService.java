@@ -44,4 +44,9 @@ public class BoardService {
         // board 만 가져오면 된다!!
         return boardRepository.findById(id).get();
     }
+
+    @Transactional
+    public void 삭제하기(Integer id) {
+        boardRepository.deleteById(id);
+    }
 }
