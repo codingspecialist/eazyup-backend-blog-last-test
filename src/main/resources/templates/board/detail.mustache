@@ -4,18 +4,18 @@
 
     <!-- 수정삭제버튼 -->
     <div class="d-flex justify-content-end">
-        <a class="btn btn-warning me-1" href="#">수정</a>
-        <form action="#">
+        <a class="btn btn-warning me-1" href="/board/{{board.id}}/updateForm">수정</a>
+        <form action="/board/{{board.id}}/delete" method="post">
             <button type="submit" class="btn btn-danger">삭제</button>
         </form>
     </div>
 
     <!-- 게시글내용 -->
     <div>
-        <h2><b>제목1</b></h2>
+        <h2><b>{{board.title}}</b></h2>
         <hr />
         <div class="m-4 p-2">
-            내용1
+            {{board.content}}
         </div>
     </div>
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /*
  * save(), findById(), findAll(), count(), deleteById()
@@ -16,4 +17,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     // fetch를 붙여야 *를 한다.
     @Query("select b from Board b join fetch b.user")
     List<Board> mFindAll();
+
+    @Query("select b from Board b join fetch b.user where b.id = :id")
+    Board mFindById(@Param("id") Integer id);
 }
