@@ -44,7 +44,7 @@ public class BoardService {
 
     public Board 상세보기(Integer id) {
         // board 만 가져오면 된다!!
-        Optional<Board> boardOP = boardRepository.findById(id);
+        Optional<Board> boardOP = boardRepository.mFindByIdJoinRepliesInUser(id);
         if (boardOP.isPresent()) {
             return boardOP.get();
         } else {

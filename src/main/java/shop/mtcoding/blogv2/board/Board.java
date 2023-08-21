@@ -16,6 +16,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,11 +41,13 @@ public class Board {
     @Column(nullable = true, length = 10000)
     private String content;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user; // 1+N
 
     // ManyToOne Eager 전략 (디폴트)
     // OneToMany Lazy 전략 (디폴트)
+    @JsonIgnoreProperties({"board"})
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
     private List<Reply> replies = new ArrayList<>();
 

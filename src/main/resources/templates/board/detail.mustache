@@ -37,16 +37,18 @@
             <b>댓글리스트</b>
         </div>
         <div class="list-group">
-            <!-- 댓글아이템 -->
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                    <div class="px-1 me-1 bg-primary text-white rounded">ssar</div>
-                    <div>댓글1</div>
+            {{#board.replies}}
+                <!-- 댓글아이템 -->
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="d-flex">
+                        <div class="px-1 me-1 bg-primary text-white rounded">{{user.username}}</div>
+                        <div>{{comment}}</div>
+                    </div>
+                    <form action="/reply/{{id}}/delete" method="post">
+                        <button class="btn">🗑</button>
+                    </form>
                 </div>
-                <form action="#">
-                    <button class="btn">🗑</button>
-                </form>
-            </div>
+            {{/board.replies}}
         </div>
     </div>
 </div>

@@ -20,6 +20,9 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private BoardRepository boardRepository;
+
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable Integer id, BoardRequest.UpdateDTO updateDTO) {
         // where 데이터, body, session값
@@ -45,6 +48,12 @@ public class BoardController {
         Board board = boardService.상세보기(id);
         model.addAttribute("board", board);
         return "board/detail";
+    }
+
+    @GetMapping("/test/board/{id}")
+    public @ResponseBody Board testDetail(@PathVariable Integer id) {
+        Board board = boardRepository.mFindByIdJoinRepliesInUser(id).get();
+        return board; 
     }
 
     // localhost:8080?page=1&keyword=바나나
