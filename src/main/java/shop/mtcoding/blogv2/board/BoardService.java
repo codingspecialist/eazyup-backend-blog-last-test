@@ -55,9 +55,9 @@ public class BoardService {
     @Transactional
     public void 삭제하기(Integer id) {
         try {
-            boardRepository.deleteById(6);
+            boardRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("6번은 없어요");
+            throw new RuntimeException(id+"를 찾을 수 없어요");
         }
     }
 
