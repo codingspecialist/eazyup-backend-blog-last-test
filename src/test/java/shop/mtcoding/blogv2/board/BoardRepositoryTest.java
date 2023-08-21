@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,13 +38,13 @@ public class BoardRepositoryTest {
     }
 
     @Test
+    public void mFindByIdJoinUserAndReplies_test(){
+        boardRepository.mFindByIdJoinUserAndReplies(1);
+    }
+
+    @Test
     public void findById_test() {
         Optional<Board> boardOP = boardRepository.findById(5);
-        if (boardOP.isPresent()) { // Board가 존재하면!! (null 안전성 제공)
-            System.out.println("테스트 : board가 있습니다");
-            Board board = boardOP.get();
-            board.getUser().getEmail(); // LazyLoading
-        }
     }
 
     @Test
