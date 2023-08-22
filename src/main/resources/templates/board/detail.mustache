@@ -32,53 +32,65 @@
             </form>
         </div>
 
-        <script>
-            async function saveReply(){
-                let requestBody = {
-                    boardId: document.querySelector("#boardId").value,
-                    comment: document.querySelector("#comment").value
-                };
-
-                console.log(requestBody);
-
-                let response = await fetch("/api/reply/save",{
-                    method:"post",
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-
-                let responseBody = await response.json();
-                console.log(responseBody);
-
-                if(responseBody.sucuess){
-                    location.reload(); // ssr
-                }else{
-                    alert(responseBody.data);
-                }
-            }
-        </script>
-
         <!-- 댓글목록 -->
         <div class="card-footer">
             <b>댓글리스트</b>
         </div>
         <div class="list-group">
             {{#board.replies}}
-                <!-- 댓글아이템 -->
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex">
-                        <div class="px-1 me-1 bg-primary text-white rounded">{{user.username}}</div>
-                        <div>{{comment}}</div>
-                    </div>
-                    <form action="/reply/{{id}}/delete" method="post">
-                        <button class="btn">🗑</button>
-                    </form>
+            <!-- 댓글아이템 -->
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="d-flex">
+                    <div class="px-1 me-1 bg-primary text-white rounded">{{user.username}}</div>
+                    <div>{{comment}}</div>
                 </div>
+                <form>
+                    <button type="button" class="btn" onclick="deleteReply('{{id}}')">🗑</button>
+                </form>
+            </div>
             {{/board.replies}}
         </div>
     </div>
 </div>
+
+<script>
+    async function deleteReply(id) {
+        let response = await fetch(`/api/reply/${id}/delete`,{
+            method: "delete"
+        });
+        let responseBody = await response.json();
+        if(responseBody.sucuess){
+            location.reload();
+        }else{
+            alert(responseBody.data);
+        }
+    }
+
+    async function saveReply() {
+        let requestBody = {
+            boardId: document.querySelector("#boardId").value,
+            comment: document.querySelector("#comment").value
+        };
+
+        console.log(requestBody);
+
+        let response = await fetch("/api/reply/save", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        let responseBody = await response.json();
+        console.log(responseBody);
+
+        if (responseBody.sucuess) {
+            location.reload(); // ssr
+        } else {
+            alert(responseBody.data);
+        }
+    }
+</script>
 
 {{> layout/footer}}
