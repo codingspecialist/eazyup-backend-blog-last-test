@@ -35,15 +35,21 @@ public class User {
     @Column(nullable = false, length = 20)
     private String email;
 
+    private String picUrl;
+
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String username, String password, String email, Timestamp createdAt) {
+    public User(Integer id, String username, String password, String email, String picUrl, Timestamp createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.picUrl = picUrl;
         this.createdAt = createdAt;
     }
+
+    
+    
 }
