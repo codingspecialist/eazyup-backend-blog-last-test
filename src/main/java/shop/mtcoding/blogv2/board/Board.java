@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -39,7 +40,9 @@ public class Board {
 
     @Column(nullable = false, length = 100)
     private String title;
-    @Column(nullable = true, length = 10000)
+
+    @Lob
+    @Column(nullable = true)
     private String content;
 
     @JsonIgnore

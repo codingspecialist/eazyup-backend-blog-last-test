@@ -27,6 +27,7 @@ public class ReplyService {
         // insert into reply_tb(comment, board_id, user_id) values(?,?,?)
 
         Board board = Board.builder().id(saveDTO.getBoardId()).build();
+
         User user = User.builder().id(sessionId).build();
 
         Reply reply = Reply.builder()

@@ -10,12 +10,20 @@
                     <input type="text" class="form-control" placeholder="Enter title" name="title">
                 </div>
                 <div class="mb-3">
-                    <textarea class="form-control" rows="5" name="content"></textarea>
+                    <textarea class="form-control" rows="5" name="content" id="content"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary form-control">글쓰기완료</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#content').summernote({
+            height: 300
+        });
+    });
+  </script>
 
 {{> layout/footer}}
