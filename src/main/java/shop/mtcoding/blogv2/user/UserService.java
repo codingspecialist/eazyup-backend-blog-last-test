@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
 import shop.mtcoding.blogv2._core.error.ex.MyException;
 import shop.mtcoding.blogv2._core.vo.MyPath;
 import shop.mtcoding.blogv2.user.UserRequest.JoinDTO;
 import shop.mtcoding.blogv2.user.UserRequest.LoginDTO;
 import shop.mtcoding.blogv2.user.UserRequest.UpdateDTO;
 
+@Slf4j
 // 핵심로직 처리, 트랜잭션 관리, 예외 처리
 @Service
 public class UserService {
@@ -35,7 +37,9 @@ public class UserService {
         try {
             Files.write(filePath, joinDTO.getPic().getBytes());
         } catch (Exception e) {
-            throw new MyException(e.getMessage());
+            log.debug("파일쓰기하다가 터짐");
+            e.printStackTrace();
+            throw new MyException("파일쓰기 오류 : "+e.getMessage());
         }
 
         User user = User.builder()
@@ -44,7 +48,15 @@ public class UserService {
                 .email(joinDTO.getEmail())
                 .picUrl(fileName)
                 .build();
-        userRepository.save(user); // em.persist
+
+        try {
+            userRepository.save(user); // em.persist
+        } catch (Exception e) {
+            log.debug("디비저장하다가 터짐");
+            e.printStackTrace();
+            throw new MyException(e.getMessage());
+        }
+        
     }
 
     public User 로그인(LoginDTO loginDTO) {

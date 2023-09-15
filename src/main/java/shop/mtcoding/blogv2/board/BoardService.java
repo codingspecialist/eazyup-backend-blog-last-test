@@ -40,7 +40,12 @@ public class BoardService {
                 .user(User.builder().id(sessionUserId).build())
                 .build();
 
-        boardRepository.save(board);
+        try {
+            boardRepository.save(board);
+        } catch (Exception e) {
+            throw new MyException(e.getMessage());
+        }
+        
     }
 
     public Page<Board> 게시글목록보기(Integer page) {

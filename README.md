@@ -35,6 +35,12 @@
 - 필터(Filter)
 - 유효성검사 자동화
 
+## dev 모드로 실행하는 법
+java -jar -Dspring.profiles.active=dev blogv2-1.0.jar
+
+## 빌드 테스트 없이 하는법
+./gradlew clean build -x test
+
 ## 테이블 쿼리
 
 ```sql
